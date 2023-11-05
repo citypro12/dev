@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grid with Side-by-Side Text and Images</title>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .grid-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .grid-item img {
+      width: 200px;
+      height: auto;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-container">
+    <div class="grid-item">
+      <img src="image1.jpg" alt="Image 1">
