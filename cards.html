@@ -10,6 +10,75 @@
       <link rel="stylesheet" href="./css/">
       <link rel="stylesheet" href="/css/demo.css">
       <link rel="stylesheet" href="scss/bootstrap.scss">
+      <link rel="stylesheet" href="scss/">
+      <script>const initSlider = () => {
+        const imageList = document.querySelector(".slider-wrapper .image-list");
+        const slideButtons = document.querySelectorAll(".slider-wrapper .slide-button");
+        const sliderScrollbar = document.querySelector(".container .slider-scrollbar");
+        const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb");
+        const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+        
+        // Handle scrollbar thumb drag
+        scrollbarThumb.addEventListener("mousedown", (e) => {
+            const startX = e.clientX;
+            const thumbPosition = scrollbarThumb.offsetLeft;
+            const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb.offsetWidth;
+            
+            // Update thumb position on mouse move
+            const handleMouseMove = (e) => {
+                const deltaX = e.clientX - startX;
+                const newThumbPosition = thumbPosition + deltaX;
+    
+                // Ensure the scrollbar thumb stays within bounds
+                const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
+                const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
+                
+                scrollbarThumb.style.left = `${boundedPosition}px`;
+                imageList.scrollLeft = scrollPosition;
+            }
+    
+            // Remove event listeners on mouse up
+            const handleMouseUp = () => {
+                document.removeEventListener("mousemove", handleMouseMove);
+                document.removeEventListener("mouseup", handleMouseUp);
+            }
+    
+            // Add event listeners for drag interaction
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+        });
+    
+        // Slide images according to the slide button clicks
+        slideButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const direction = button.id === "prev-slide" ? -1 : 1;
+                const scrollAmount = imageList.clientWidth * direction;
+                imageList.scrollBy({ left: scrollAmount, behavior: "smooth" });
+            });
+        });
+    
+         // Show or hide slide buttons based on scroll position
+        const handleSlideButtons = () => {
+            slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "flex";
+            slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "flex";
+        }
+    
+        // Update scrollbar thumb position based on image scroll
+        const updateScrollThumbPosition = () => {
+            const scrollPosition = imageList.scrollLeft;
+            const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
+            scrollbarThumb.style.left = `${thumbPosition}px`;
+        }
+    
+        // Call these two functions when image list scrolls
+        imageList.addEventListener("scroll", () => {
+            updateScrollThumbPosition();
+            handleSlideButtons();
+        });
+    }
+    
+    window.addEventListener("resize", initSlider);
+    window.addEventListener("load", initSlider);</script>
       
       <!-- Demo CSS (No need to include it into your project) -->
       
@@ -36,7 +105,7 @@
     <link href="css/style.css" rel="stylesheet">
       
    </head>
-   <body>
+   <body >
      <!-- Topbar Start -->
      <div class="container-fluid">
       <div class="row bg-secondary py-2 px-lg-5">
@@ -105,6 +174,7 @@
                   <a href="about.html" class="nav-item nav-link">About</a>
                   <a href="service.html" class="nav-item nav-link">Service</a>
                   <a href="price.html" class="nav-item nav-link">Price</a>
+                  <a href="cards.html" class="nav-item nav-link">Available Staffy Pups</a>
                   <a href="booking.html" class="nav-item nav-link">Booking</a>
                   <div class="nav-item dropdown">
                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
@@ -120,49 +190,91 @@
       </nav>
   </div>
   <!-- Navbar End -->
+  <!-- Start of Slideshow -->
+     
+       
 
-      <header class="cd__intro">
-         <h1> UI Cards Example </h1>
-         <p> UI Cards </p>
-         <div class="cd__action">
-            <a href="https://www.codepel.com/cards/css-cards-with-images" title="Back to download and tutorial page" class="cd__btn back">Back to Tutorial</a>
-         </div>
+      <header class="cd__intro" >
+        <div>
+            <div style="text-align: justify;">
+                <strong>
+                <h1 class="available"> Our Available Staffies Breeds</h1></strong>
+         
+            
+                <p style="font-size: large;"100;> exceptional pet dogs, ready to bring endless joy and 
+                companionship into your life! <br>
+                These loving and loyal companions are more than just pets  
+            they are cherished members of the family. <br>
+             With their wagging  tails, expressive eyes, and unwavering devotion, <br>
+            our dogs have the remarkable 
+            ability to brighten even the gloomiest of days.
+        </p>
+    </div>
+       
       </header>
+      <!-- Start of Slide Show -->
+      
+      <!-- End of Slide Show -->
+      <!--  -->
       <!--$%adsense%$-->
       <main class="cd__main">
          <!-- Start DEMO HTML (Use the following code into your project)-->
          <div class="grid">
   <div class="grid__item">
-    <div class="card"><img class="card__img" src="/img/StaffBullTerrierBluebroxibro2.JPG">
-      <div class="card__content">
-        <h1 class="card__header">A starry night</h1>
-        <p class="card__text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
-        <button class="card__btn">Explore <span>&rarr;</span></button>
+    <div class="card" style="text-align: center;"><img class="card__img" src="/img/petz1.webp">
+      <div class="card__content" >
+        <h1 class="card__header">LUNNA </h1>
+        <h4 style="color: orangered;"><strong>$2000 AUD </strong></h4>
+        <div class="card-body text-center p-0"  style="font-size: 2rem;" >
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-2"><i ></i>Gender: Male</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Age: 12 Weeks</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Color: Blue</li></b>
+               
+            </ul>
+        </div>
+        <button class="card__btn" style="color: green;">Reserve LUNNA Now <span>&rarr;</span></button>
       </div>
     </div>
   </div>
   <div class="grid__item">
-    <div class="card"><img class="card__img" src="/img/red.jpg">
-      <div class="card__content">
-        <h1 class="card__header">Misty mornings</h1>
-        <p class="card__text">Capture the stunning <strong>essence</strong> of the early morning sunrise in the Californian wilderness.</p>
-        <button class="card__btn">Explore <span>&rarr;</span></button>
+    <div class="card"><img class="card__img"   src="/img/petz2.webp">
+        <div class="card__content" style="text-align:center;" >
+            <h1 class="card__header">BELLA</h1>
+            <h4 style="color: orangered;"><strong>$2000 AUD </strong></h4>
+            <div class="card-body text-center p-0"  style="font-size: 2rem;" >
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-2"><i ></i>Gender: Male</li></b>
+                    <li class="list-group-item p-2"><i ><b></b></i>Age: 12 Weeks</li></b>
+                    <li class="list-group-item p-2"><i ><b></b></i>Color: Blue</li></b>
+                   
+                </ul>
+            </div>
+            <button class="card__btn" style="color: green;">Reserve BELLA Now <span>&rarr;</span></button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="grid__item">
-    <div class="card"><img class="card__img" src="img/staffie-blue.jpg">
-      <div class="card__content">
-        <h1 class="card__header">Utah sunsets</h1>
-        <p class="card__text">Sunsets over the <strong>stunning</strong> Utah Canyonlands, is truly something much more than incredible.</p>
-        <button class="card__btn">Explore <span>&rarr;</span></button>
+  <div class="grid__item" style="text-align: center;">
+    <div class="card"><img class="card__img" src="img/petz.webp">
+        <div class="card__content" >
+            <h1 class="card__header">MILLIE </h1>
+            <h4 style="color: orangered;"><strong>$2000 AUD </strong></h4>
+            <div class="card-body text-center p-0"  style="font-size: 2rem;" >
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-2"><i ></i>Gender: Male</li></b>
+                    <li class="list-group-item p-2"><i ><b></b></i>Age: 12 Weeks</li></b>
+                    <li class="list-group-item p-2"><i ><b></b></i>Color: Blue</li></b>
+                   
+                </ul>
+            </div>
+            <button class="card__btn" style="color: green;">Reservee MILLIE Now <span>&rarr;</span></button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
+      
          <!-- END EDMO HTML (Happy Coding!)-->
       </main>
-      <footer class="cd__credit">Author: Curtis Lee - Distributed By: <a title="Free web design code & scripts" href="https://www.codepel.com?source=demo-page" target="_blank">CodePel</a></footer>
+ 
       
       <!-- Script JS -->
       <script src="./jss/script.js"></script>
@@ -172,41 +284,66 @@
         <div class="grid">
  <div class="grid__item">
    <div class="card"><img class="card__img" src="/img/StaffBullTerrierBluebroxibro2.JPG">
-     <div class="card__content">
-       <h1 class="card__header">A starry night</h1>
-       <p class="card__text">Look up at the night sky, and find yourself <strong>immersed</strong> in the amazing mountain range of Aspen. </p>
-       <button class="card__btn">Explore <span>&rarr;</span></button>
-     </div>
-   </div>
- </div>
+    <div class="card__content" style="text-align: center;" >
+        <h1 class="card__header">BEAUTY </h1>
+        <h4 style="color: orangered;"><strong>$2000 AUD </strong></h4>
+        <div class="card-body text-center p-0"  style="font-size: 2rem;" >
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-2"><i ></i>Gender: Male</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Age: 12 Weeks</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Color: Blue</li></b>
+               
+            </ul>
+        </div>
+        <button class="card__btn" style="color: green;">Reserve BEAUTY Now <span>&rarr;</span></button>
+      </div>
+    </div>
+  </div>
  <div class="grid__item">
-   <div class="card"><img class="card__img" src="img/staffie-outdoor.jpg">
-     <div class="card__content">
-       <h1 class="card__header">Misty mornings</h1>
-       <p class="card__text">Capture the stunning <strong>essence</strong> of the early morning sunrise in the Californian wilderness.</p>
-       <button class="card__btn">Explore <span>&rarr;</span></button>
-     </div>
-   </div>
- </div>
+   <div class="card"><img class="card__img" src="img/red.jpg">
+    <div class="card__content" style="text-align: center;"  >
+        <h1 class="card__header">LOVELY</h1>
+        <h4 style="color: orangered;"><strong>$1500 AUD </strong></h4>
+        <div class="card-body text-center p-0"  style="font-size: 2rem;" >
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-2"><i ></i>Gender: Male</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Age: 12 Weeks</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Color: Blue</li></b>
+               
+            </ul>
+        </div>
+        <button class="card__btn" style="color: green;">Reserve LOVELY Now <span>&rarr;</span></button>
+      </div>
+    </div>
+  </div>
  <div class="grid__item">
    <div class="card"><img class="card__img" src="img/staffordshire-bull-terrier-dogs-f.webp">
-     <div class="card__content">
-       <h1 class="card__header">Utah sunsets</h1>
-       <p class="card__text">Sunsets over the <strong>stunning</strong> Utah Canyonlands, is truly something much more than incredible.</p>
-       <button class="card__btn">Explore <span>&rarr;</span></button>
-     </div>
-   </div>
- </div>
+    <div class="card__content" style="text-align: center;"  >
+        <h1 class="card__header"> BUDDY</h1>
+        <h4 style="color: orangered;"><strong>$2000 AUD </strong></h4>
+        <div class="card-body text-center p-0"  style="font-size: 2rem;" >
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item p-2"><i ></i>Gender: Male</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Age: 12 Weeks</li></b>
+                <li class="list-group-item p-2"><i ><b></b></i>Color: Blue</li></b>
+               
+            </ul>
+        </div>
+        <button class="card__btn" style="color: green;">Reserve BUDDY Now <span>&rarr;</span></button>
+      </div>
+    </div>
+  </div>
 </div>
+
         <!-- END EDMO HTML (Happy Coding!)-->
      <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
+    <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5" >
       <div class="row pt-5">
           <div class="col-lg-4 col-md-12 mb-5">
               <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Pet</span>Lover</h1>
               <p class="m-0">For pet lovers, the bond with their furry companions transcends mere companionship; it's an unspoken language of love and unwavering devotion. These cherished creatures are more than pets; they are family members, loyal confidants, and a source of boundless joy. In their presence, everyday moments become extraordinary, and life is enriched by the warmth of a wagging tail or a soft purr. Pet lovers find solace, laughter, and immeasurable happiness in the gentle nuzzles, playful antics, and unwavering companionship of their beloved animals, for they know that in the eyes of their pets, they are cherished above all else.</p>
           </div>
-          <div class="col-lg-8 col-md-12">
+          <div class="col-lg-8 col-md-12" >
               <div class="row">
                   <div class="col-md-4 mb-5">
                       <h5 class="text-primary mb-4">Get In Touch</h5>
@@ -248,11 +385,11 @@
           </div>
       </div>
   </div>
-  <div class="container-fluid text-white py-4 px-sm-3 px-md-5" style="background: #111111;">
+  <div class="container-fluid text-white py-4 px-sm-3 px-md-5" style="background: #111111;" >
       <div class="row">
           <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
               <p class="m-0 text-white">
-                  &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. 
+                  &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserveed. 
         
         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
         Designed by <a class="text-white font-weight-bold" href="https://htmlcodex.com">itech digital solutions</a>

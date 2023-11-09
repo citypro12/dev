@@ -19,11 +19,14 @@ body {
   background-color: #f5f5f5;
   font-family: "Inter", sans-serif;
 }
+
 @media (max-width: 60em) {
   body {
     padding: 3rem;
+    
   }
 }
+
 
 .grid {
   display: grid;
