@@ -219,10 +219,10 @@ html {
 .card__btn:hover span, .card__btn:active span {
   margin-left: 1.5rem;
 }
-/* .available{
+.available{
   font-size: xx-large;
   font-family: sans-serif;
-} */
+}
 
 /* Start of slide show */
 
