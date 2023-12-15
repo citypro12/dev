@@ -4575,6 +4575,7 @@ input[type="button"].btn-block {
 .card-img-bottom {
   flex-shrink: 0;
   width: 100%;
+  height: 100%;
 }
 
 .card-img,
@@ -6356,7 +6357,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #ED6436 !important;
+  background-color: #ed643b !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
