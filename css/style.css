@@ -92,6 +92,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: left 5%;
   
 }
+.vertical{
+  border-left: 5px solid black;
+  height: 1rem;
+}
 
 #rcorners3 {
   border-radius: 25px;
