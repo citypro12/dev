@@ -7809,18 +7809,6 @@ button.bg-dark:focus {
   margin-bottom: 3rem !important;
   
 }
-.shipping{
-  display: grid;
-  align-items: center; 
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 5px;
-
-}
-img {
-  max-width: 100%;
-  max-height:100%;
-}
-
 .ml-5,
 .mx-5 {
   margin-left: 3rem !important;
